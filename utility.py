@@ -1,10 +1,8 @@
-import fuzzywuzzy as fuzz
+from fuzzywuzzy import fuzz
 
 # Simple fucntion for calculating
 # ration of similarity between two strings
 # by using their levenshstein distance
 
 def Ratio (a, b) :
-	ratio = fuzz.ratio(a.lower(), b.lower())
-
-	return ratio
+	return fuzz.ratio(a.lower(), b.lower())
