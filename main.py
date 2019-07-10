@@ -5,16 +5,18 @@ import utility
 import openpyxl
 
 def main():
-    for i in sys.argv:
 
-        # reads csv files from command line
-        readCSV = csv.reader(sys.argv, delimiter=',')
-        print(readCSV)
-        for row in readCSV:
-            for column in readCSV:
+    rows = []
 
-                # prints the ratio of similarity for each word in csv file
-                print(utility.Ratio(readCSV, "usd"))
-    return
+    # reads csv files from command line
+    readCSV = csv.reader(sys.argv, delimiter=',')
+    print(readCSV)
+    for row in readCSV:
+        rows.append(row)
+        
+    for row in rows:
+        for col in row:
+            print(col)
+return
 
 main()
