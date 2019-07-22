@@ -4,12 +4,13 @@ import csv
 import utility
 import xlwt
 from xlwt import Workbook
+import pickle
 
 def main():
 
     dict_type = sys.argv[1]
-    dict = utility.initialize(dict_type)
-    standard_list = []
+    dict = utility.initialize_dict(dict_type)
+    results = []
     whitelist = set('abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ')
 
 
@@ -24,8 +25,15 @@ def main():
         for row, row_2 in zip(reader, reader_2):
             for i in row:
                 string = ''.join(filter(whitelist.__contains__, i))
-                standard_list.append(utility.match(string.lower(), dict, dict_type))
+                results.append(utility.match(string.lower(), dict))
 
-        utility.final_output(row, row_2, standard_list)
-        
+        utility.final_output(row, row_2, results, dict)
+
+    filename = "dictionary"
+    outfile = open(filename, 'wb')
+
+    pick.dump(dict, outfile)
+    outfile.close()
+
+
 main()

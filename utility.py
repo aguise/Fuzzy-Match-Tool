@@ -1,32 +1,30 @@
 from fuzzywuzzy import fuzz
 import csv
-import dictionary
+import initialize
 import xlwt
-import currencies
+import data
 from xlwt import Workbook
 
 # Simple fucntion for calculating
 # ration of similarity between two strings
 # by using their levenshstein distance
 def ratio (a, b) :
-        return fuzz.partial_ratio(a.lower(), b.lower())
+        return fuzz.ratio(a.lower(), b.lower())
 
 # Initializes dictionary with values corresponding to data types
-def initialize(data):
-        
-        if data == "currency":
-                dict = dictionary.currency()
-
-        elif data == "country":
-                dict = dictionary.country()
-        
-        else:
-                dict = []
+def initialize_dict(dict_type):
+        dict = []
+        if dict_type == "currencies":
+                dict = initialize.currencies()
+        elif dict_type == "countries":
+                dict = initialize.countries()
+        elif dict_type == "languages":
+                dict = initialize.languages()
         
         return dict
 
 # Performs matching of words using ration calculation
-def match(string, dict, dict_type):
+def match(string, dict):
         high = 0
         second_highest = 0
 
@@ -37,38 +35,39 @@ def match(string, dict, dict_type):
                 if string_ratio > high:
                         high = string_ratio
                         key_string = key
-                elif string_ratio > second_highest:
+                else:
                         second_highest = string_ratio
                         key_string_2 = key
 
-        dictionary = find_dict(dict_type)
-        dict_1 = dictionary[dict[key_string]]
-        dict_2 = dictionary[dict[key_string_2]]
+        dict_1 = dict[key_string]
+        dict_2 = dict[key_string_2]
 
         high = 0
         dict_num = 0
 
         # Loop through more specific dictionaries to get exact match
-        for i, j in zip(dict_1, dict_2):
-                string_ratio_1 = ratio(string, i)
-                string_ratio_2 = ratio(string, j)
+        for i in dict_1:
+                string_ratio = ratio(string, i)
 
-                if string_ratio_1 > string_ratio_2:
-                        if string_ratio_1 > high:
-                                high = string_ratio_1
-                                dict_num = 1
-                else:
-                        if string_ratio_2 > high:
-                                high = string_ratio_2
-                                dict_num = 2
+                if string_ratio > high:
+                        high = string_ratio
+                        dict_num = 1
+                        key_string = i
+        for i in dict_2:
+                string_ratio = ratio(string, i)
+
+                if string_ratio > high:
+                        high = string_ratio
+                        dict_num = 2
+                        key_string = i
         
         if dict_num == 1:
-                return dict[key_string]
+                return dict_1[key_string]
         else:
-                return dict[key_string_2]
+                return dict_2[key_string]
 
 #  Outputs raw input and standardized form to excel sheet
-def final_output(raw, standard, result):
+def final_output(raw, standard, result, dict):
         wb = Workbook()
         ws = wb.add_sheet('Sheet 1', cell_overwrite_ok=True)
 
@@ -90,11 +89,9 @@ def final_output(raw, standard, result):
                         correct += 1
                 else:
                         ws.write(count, 3, 'FALSE')
+                        dict[j][i] = j
+                        
                 count += 1
-
+        
         ws.write(1, 4, 100*(correct / (count-1)))
         wb.save('output.xls')   
-
-def find_dict(dict_type):
-        if dict_type == "currency":
-                return currencies.currency
