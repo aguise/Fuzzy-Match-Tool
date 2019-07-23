@@ -4,20 +4,29 @@ import initialize
 import xlwt
 import data
 from xlwt import Workbook
+import pickle
 
 # Simple fucntion for calculating
 # ration of similarity between two strings
 # by using their levenshstein distance
 def ratio (a, b) :
-        return fuzz.ratio(a.lower(), b.lower())
+        if contains_multiple_words(a):
+                return fuzz.partial_ratio(a.lower(), b.lower())
+        else :
+                return fuzz.ratio(a.lower(), b.lower())
 
 # Initializes dictionary with values corresponding to data types
-def initialize_dict(dict_type):
+def initialize_dict(dict_type, filename):
         dict = []
         if dict_type == "currencies":
-                dict = initialize.currencies()
+                infile = open(filename, 'rb')
+                dict = pickle.load(infile)
+                infile.close()
         elif dict_type == "countries":
-                dict = initialize.countries()
+                infile = open(filename, 'rb')
+                dict = pickle.load(infile)
+                infile.close()
+                print(dict["au"])
         elif dict_type == "languages":
                 dict = initialize.languages()
         
@@ -35,7 +44,7 @@ def match(string, dict):
                 if string_ratio > high:
                         high = string_ratio
                         key_string = key
-                else:
+                elif string_ratio > second_highest:
                         second_highest = string_ratio
                         key_string_2 = key
 
@@ -95,3 +104,6 @@ def final_output(raw, standard, result, dict):
         
         ws.write(1, 4, 100*(correct / (count-1)))
         wb.save('output.xls')   
+
+def contains_multiple_words(s):
+        return len(s.split()) > 1

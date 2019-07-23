@@ -9,7 +9,8 @@ import pickle
 def main():
 
     dict_type = sys.argv[1]
-    dict = utility.initialize_dict(dict_type)
+    filename = dict_type + '_dictionary'
+    dict = utility.initialize_dict(dict_type, filename)
     results = []
     whitelist = set('abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ')
 
@@ -29,10 +30,9 @@ def main():
 
         utility.final_output(row, row_2, results, dict)
 
-    filename = "dictionary"
     outfile = open(filename, 'wb')
 
-    pick.dump(dict, outfile)
+    pickle.dump(dict, outfile)
     outfile.close()
 
 

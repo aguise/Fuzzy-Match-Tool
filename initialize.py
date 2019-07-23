@@ -5,6 +5,8 @@ def currencies():
         "united states dollar" : data.usd,
         "usd" : data.usd,
         "united states" : data.usd,
+        "us dollar" : data.usd,
+        "american dollar" : data.usd,
         "canadian dollar" : data.cad,
         "cad" : data.cad,
         "swiss franc": data.chf,

@@ -148,7 +148,6 @@ united_states = {
 canada = {
 	"ca" : "ca",
 	"canada" : "ca",
-	"ca" : "ca"
 }
 switzerland = {
 	"switzerland" : "ch",
