@@ -2,7 +2,6 @@ from fuzzywuzzy import fuzz
 import csv
 import initialize
 import xlwt
-import data
 from xlwt import Workbook
 import pickle
 
@@ -17,63 +16,38 @@ def ratio (a, b) :
 
 # Initializes dictionary with values corresponding to data types
 def initialize_dict(dict_type, filename):
-        dict = []
-        if dict_type == "currencies":
-                infile = open(filename, 'rb')
-                dict = pickle.load(infile)
-                infile.close()
-        elif dict_type == "countries":
-                infile = open(filename, 'rb')
-                dict = pickle.load(infile)
-                infile.close()
-                print(dict["au"])
-        elif dict_type == "languages":
-                dict = initialize.languages()
-        
+        infile = open(filename, 'rb')
+        dict = pickle.load(infile)
+        infile.close()
+
         return dict
 
 # Performs matching of words using ration calculation
 def match(string, dict):
-        high = 0
-        second_highest = 0
+        high_1 = 0
+        high_2 = 0
 
         # Loop through base dictionary to narrow search
         for key in dict:
                 string_ratio = ratio(string, key)
+                string_ratio_2 = ratio(string, dict[key])
 
-                if string_ratio > high:
-                        high = string_ratio
+                if string_ratio == 100:
+                        return dict[key]
+                elif string_ratio_2 == 100:
+                        return dict[key]
+                if string_ratio > high_1:
+                        high_1 = string_ratio
                         key_string = key
-                elif string_ratio > second_highest:
-                        second_highest = string_ratio
-                        key_string_2 = key
+                if string_ratio_2 > high_2:
+                        high_2 = string_ratio_2
+                        key_string = dict[key]
 
-        dict_1 = dict[key_string]
-        dict_2 = dict[key_string_2]
-
-        high = 0
-        dict_num = 0
-
-        # Loop through more specific dictionaries to get exact match
-        for i in dict_1:
-                string_ratio = ratio(string, i)
-
-                if string_ratio > high:
-                        high = string_ratio
-                        dict_num = 1
-                        key_string = i
-        for i in dict_2:
-                string_ratio = ratio(string, i)
-
-                if string_ratio > high:
-                        high = string_ratio
-                        dict_num = 2
-                        key_string = i
-        
-        if dict_num == 1:
-                return dict_1[key_string]
+        if high_1 > high_2:
+                return dict[key_string]
         else:
-                return dict_2[key_string]
+                return key_string
+                
 
 #  Outputs raw input and standardized form to excel sheet
 def final_output(raw, standard, result, dict):
@@ -98,7 +72,7 @@ def final_output(raw, standard, result, dict):
                         correct += 1
                 else:
                         ws.write(count, 3, 'FALSE')
-                        dict[j][i] = j
+                        dict[i] = j
                         
                 count += 1
         

@@ -9,7 +9,7 @@ import pickle
 def main():
 
     dict_type = sys.argv[1]
-    filename = dict_type + '_dictionary'
+    filename = 'dictionaries\\' + dict_type + '_dictionary'
     dict = utility.initialize_dict(dict_type, filename)
     results = []
     whitelist = set('abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ')
