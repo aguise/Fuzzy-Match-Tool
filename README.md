@@ -30,7 +30,8 @@ python main.py "currencies" currnecy_input.csv currency_output.csv
 ```
 
 ## Built With
-* [fuzzywuzzy](https://pypi.org/project/fuzzywuzzy/) - Fuzzy string matching utilizing Levenshtein Distance
+* [fuzzywuzzy](https://pypi.org/project/fuzzywuzzy/) - Fuzzy string matching library utilizing Levenshtein Distance
+* [xlwt](https://pypi.org/project/xlwt/) - Python library that helps generate spreadsheet files
 
 ## Authors
 * **Andrew (Mac) Guise** - [aguise](https://github.com/aguise)
