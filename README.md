@@ -32,5 +32,8 @@ python main.py "currencies" currnecy_input.csv currency_output.csv
 ## Built With
 * [fuzzywuzzy](https://pypi.org/project/fuzzywuzzy/) - Fuzzy string matching utilizing Levenshtein Distance
 
-
+## Authors
+* **Andrew (Mac) Guise** - [aguise](https://github.com/aguise)
+* **Nicholas Rucker** - [nicholasrucker](https://github.com/nicholasrucker)
+* **Amruta Rao**
 
