@@ -36,5 +36,5 @@ python main.py "currencies" currnecy_input.csv currency_output.csv
 ## Authors
 * **Andrew (Mac) Guise** - [aguise](https://github.com/aguise)
 * **Nicholas Rucker** - [nicholasrucker](https://github.com/nicholasrucker)
-* **Amruta Rao**
+* **Amruta Rao** - [amurao1998](https://github.com/amurao1998)
 
