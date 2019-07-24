@@ -12,3 +12,14 @@ pip install fuzzywuzzy
 pip install xlwt
 ```
 
+## Running the Project
+The following command line script successfully runs this project. Command line arguments include inputting what type of ISO code data is being matched, and then CSV files for the raw data input and what the standardadize format should be if different from ISO code standard.
+```
+python main.py [type of data] [raw_data_file] [standard_data_file]
+```
+
+### Example
+```
+python main.py "currencies" currnecy_input.csv currency_output.csv
+```
+
