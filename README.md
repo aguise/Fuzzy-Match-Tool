@@ -1,5 +1,5 @@
 # Fuzzy-Match-Tool
-A matching tool that utilizes fuzzy-matching algorithms to take in raw data inputs and outputs standardized ISO-Codes
+A matching tool that utilizes fuzzy-matching algorithms to take in raw data inputs and outputs standardized ISO-Codes into an Excel file for access
 
 ## Getting Started
 These instructions will help you run the following project and produce a list of standardized ISO codes for your raw data input
@@ -12,6 +12,12 @@ pip install fuzzywuzzy
 pip install xlwt
 ```
 
+## Installing 
+Simply clone the repository into a folder on your local project directory
+```
+git clone https://github.com/aguise/Fuzzy-Match-Tool.git
+```
+
 ## Running the Project
 The following command line script successfully runs this project. Command line arguments include inputting what type of ISO code data is being matched, and then CSV files for the raw data input and what the standardadize format for this data.
 ```
@@ -22,4 +28,9 @@ python main.py [type of data] [raw_data_file] [standard_data_file]
 ```
 python main.py "currencies" currnecy_input.csv currency_output.csv
 ```
+
+## Built With
+* [fuzzywuzzy](https://pypi.org/project/fuzzywuzzy/) - Fuzzy string matching utilizing Levenshtein Distance
+
+
 
