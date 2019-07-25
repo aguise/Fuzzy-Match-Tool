@@ -7,13 +7,11 @@ from xlwt import Workbook
 import pickle
 
 def main():
-
     dict_type = sys.argv[1]
     filename = 'dictionaries\\' + dict_type + '_dictionary'
     dict = utility.initialize_dict(dict_type, filename)
     results = []
     whitelist = set('abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ')
-
 
     file = sys.argv[2]
     file_standards = sys.argv[3]

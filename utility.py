@@ -38,15 +38,17 @@ def match(string, dict):
                         return dict[key]
                 if string_ratio > high_1:
                         high_1 = string_ratio
-                        key_string = key
+                        key_string_1 = key
                 if string_ratio_2 > high_2:
                         high_2 = string_ratio_2
-                        key_string = dict[key]
+                        key_string_2 = dict[key]
 
         if high_1 > high_2:
-                return dict[key_string]
+                print(key_string_1)
+                return dict[key_string_1]
         else:
-                return key_string
+                print(key_string_2)
+                return key_string_2
                 
 
 #  Outputs raw input and standardized form to excel sheet
