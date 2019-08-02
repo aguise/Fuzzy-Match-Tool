@@ -6,8 +6,7 @@ import xlwt
 from xlwt import Workbook
 import pickle
 
-def main():
-    dict_type = sys.argv[1]
+def main(dict_type, file, file_standards):
     filename = 'dictionaries\\' + dict_type + '_dictionary'
     dict = utility.initialize_dict(dict_type, filename)
     results = []
