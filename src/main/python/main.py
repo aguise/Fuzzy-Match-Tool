@@ -1,5 +1,6 @@
 import sys
 import csv
+import os
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import QCoreApplication
@@ -10,18 +11,39 @@ class window(QMainWindow):
     def __init__(self):
         super(window, self).__init__()
         self.setGeometry(50, 50, 1200, 700)
-        self.setWindowTitle('Fuzzy Match Tool')
+        self.setWindowTitle('BNY Mellon Fuzzy Match Tool')
+        self.setWindowIcon(QIcon(os.getcwd() + "\src\main\icons\bny_mellon.png"))
+        self.setStyleSheet('''.window{
+            background-color: rgb(142, 146, 147)
+        }
+        ''')
 
         # add all widgets
-        self.btn_1 = QPushButton('1', self)
-        self.btn_2 = QPushButton('2', self)
-        self.btn_3 = QPushButton('3', self)
-        self.btn_4 = QPushButton('4', self)
+        self.btn_1 = QPushButton('Standardize', self)
+        self.btn_1.setStyleSheet('''.QPushButton{
+            background-color: rgb(142, 146, 147)
+        }
+        ''')
+        self.btn_2 = QPushButton('Standardize and Evaluate', self)
+        self.btn_2.setStyleSheet('''.QPushButton{
+            background-color: rgb(142, 146, 147)
+        }
+        ''')
+        self.btn_3 = QPushButton('About', self)
+        self.btn_3.setStyleSheet('''.QPushButton{
+            background-color: rgb(142, 146, 147)
+        }
+        ''')
+        self.quit = QPushButton('Quit', self)
+        self.quit.setStyleSheet('''.QPushButton{
+            background-color: rgb(142, 146, 147)
+        }
+        ''')
 
         self.btn_1.clicked.connect(self.button1)
         self.btn_2.clicked.connect(self.button2)
         self.btn_3.clicked.connect(self.button3)
-        self.btn_4.clicked.connect(self.button4)
+        self.quit.clicked.connect(QCoreApplication.instance().quit)
 
         # add tabs
         self.tab1 = self.ui1()
@@ -33,21 +55,6 @@ class window(QMainWindow):
         self.home()
 
     def home(self):
-        quit_button = QPushButton('Quit', self)
-        quit_button.clicked.connect(QCoreApplication.instance().quit)
-        quit_button.resize(quit_button.minimumSizeHint())
-        quit_button.move(50, 250)
-
-        standardize_button = QPushButton('Standardize', self)
-        standardize_button.resize(standardize_button.minimumSizeHint())
-        standardize_button.move(350, 100)
-        
-
-        uploadButton = QPushButton('Upload', self)
-        uploadButton.resize(uploadButton.minimumSizeHint())
-        uploadButton.move(200, 100)
-
-        uploadButton.clicked.connect(self.open)
 
         self.show()
 
@@ -56,11 +63,21 @@ class window(QMainWindow):
         left_layout.addWidget(self.btn_1)
         left_layout.addWidget(self.btn_2)
         left_layout.addWidget(self.btn_3)
-        left_layout.addWidget(self.btn_4)
+        left_layout.addWidget(self.quit)
         left_layout.addStretch(5)
         left_layout.setSpacing(20)
         left_widget = QWidget()
         left_widget.setLayout(left_layout)
+        left_widget.setStyleSheet('''
+        .QWidget {
+            background-color: rgb(175, 134, 53);
+        }
+        ''')
+
+        bny_logo = QLabel(self)
+        pixmap = QPixmap(os.getcwd() + "\src\main\icons\bny_logo.png")
+        bny_logo.setPixmap(pixmap)
+        left_layout.addWidget(bny_logo)
 
         self.right_widget = QTabWidget()
         self.right_widget.tabBar().setObjectName("mainTab")
@@ -98,15 +115,32 @@ class window(QMainWindow):
 
     def ui1(self):
         main_layout = QVBoxLayout()
-        main_layout.addWidget(QLabel('page 1'))
+        main_layout.addWidget(QLabel('Select the type of data you are inputting and then browse the computer for a CSV file of data that needs to be standardized: '))
         main_layout.addStretch(5)
 
         comboBox = QComboBox(self)
         comboBox.addItem("Currencies")
         comboBox.addItem("Countries")
         comboBox.addItem("Languages")
+        comboBox.setStyleSheet('''
+        .QComboBox {
+            text-align: center;
+            }
+            ''')
+
+        standardize_button = QPushButton('Standardize', self)
+        standardize_button.resize(standardize_button.minimumSizeHint())
+        standardize_button.move(350, 100)
+
+        uploadButton = QPushButton('Upload', self)
+        uploadButton.resize(uploadButton.minimumSizeHint())
+        uploadButton.move(200, 100)
+
+        uploadButton.clicked.connect(self.open)
 
         main_layout.addWidget(comboBox)
+        main_layout.addWidget(standardize_button)
+        main_layout.addWidget(uploadButton)
         main = QWidget()
         main.setLayout(main_layout)
         return main
@@ -121,7 +155,7 @@ class window(QMainWindow):
 
     def ui3(self):
         main_layout = QVBoxLayout()
-        main_layout.addWidget(QLabel('page 3'))
+        main_layout.addWidget(QLabel('Fuzzy Match Tool'))
         main_layout.addStretch(5)
         main = QWidget()
         main.setLayout(main_layout)
