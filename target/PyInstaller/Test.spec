@@ -3,13 +3,13 @@
 block_cipher = None
 
 
-a = Analysis(['C:\\Users\\xbbnyyc\\OneDrive - BNY Mellon\\Documents\\Test\\src\\main\\python\\main.py'],
-             pathex=['C:\\Users\\xbbnyyc\\OneDrive - BNY Mellon\\Documents\\Test\\target\\PyInstaller'],
+a = Analysis(['C:\\Users\\xbbnyyc\\OneDrive - BNY Mellon\\Documents\\Fuzzy-Match-Tool\\src\\main\\python\\main.py'],
+             pathex=['C:\\Users\\xbbnyyc\\OneDrive - BNY Mellon\\Documents\\Fuzzy-Match-Tool\\target\\PyInstaller'],
              binaries=[],
              datas=[],
              hiddenimports=[],
              hookspath=['c:\\users\\xbbnyyc\\appdata\\local\\continuum\\anaconda3\\lib\\site-packages\\fbs\\freeze\\hooks'],
-             runtime_hooks=['C:\\Users\\xbbnyyc\\AppData\\Local\\Temp\\tmpnvb2c5_u\\fbs_pyinstaller_hook.py'],
+             runtime_hooks=['C:\\Users\\xbbnyyc\\AppData\\Local\\Temp\\tmp23tkfzzm\\fbs_pyinstaller_hook.py'],
              excludes=[],
              win_no_prefer_redirects=False,
              win_private_assemblies=False,
@@ -26,7 +26,7 @@ exe = EXE(pyz,
           bootloader_ignore_signals=False,
           strip=False,
           upx=False,
-          console=False , icon='C:\\Users\\xbbnyyc\\OneDrive - BNY Mellon\\Documents\\Test\\src\\main\\icons\\Icon.ico')
+          console=False , icon='C:\\Users\\xbbnyyc\\OneDrive - BNY Mellon\\Documents\\Fuzzy-Match-Tool\\src\\main\\icons\\Icon.ico')
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
